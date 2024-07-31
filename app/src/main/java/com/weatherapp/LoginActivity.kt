@@ -65,6 +65,7 @@ fun LoginPage(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = email,
             label = { Text(text = "Digite seu e-mail") },
+            Spacer(modifier = Modifier.size(24.dp)),
             modifier = Modifier.fillMaxWidth(),
             onValueChange = { email = it }
         )
