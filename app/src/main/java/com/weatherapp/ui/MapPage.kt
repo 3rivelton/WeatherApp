@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.weatherapp.R
 
 @Composable
-fun MapPage(modifier: Modifier) {
+fun MapPage() {
     Column(
         modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.purple_700))
             .wrapContentSize(Alignment.Center)
