@@ -50,18 +50,21 @@ fun MapPage(
                     title = it.name, snippet = "${it.location}")
             }
         }
+
         Marker(
             state = MarkerState(position = recife),
             title = "Recife",
             snippet = "Marcador em Recife",
             icon = BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE)
         )
+
         Marker(
             state = MarkerState(position = caruaru),
             title = "Caruaru",
             snippet = "Marcador em Caruaru",
             icon = BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE)
         )
+
         Marker(
             state = MarkerState(position = joaopessoa),
             title = "Joao Pessoa",
