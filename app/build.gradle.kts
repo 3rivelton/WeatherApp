@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -10,6 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.weatherapp"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -62,6 +64,11 @@ dependencies {
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // Google maps
+    implementation(libs.gms.play.services.maps)
+    implementation(libs.gms.play.services.location)
+    // Google maps for compose
+    implementation(libs.android.maps.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -10,12 +10,19 @@ activityCompose = "1.8.0"
 composeBom = "2024.04.01"
 benchmarkMacro = "1.2.4"
 lifecycleViewmodelCompose = "2.7.0"
+mapsComposeVersion = "2.8.0"
 navigationCompose = "2.7.7"
+playServicesMapsVersion = "18.2.0"
+playServicesLocationVersion = "21.2.0"
+secretsGradlePlugin = "2.0.1"
 
 [libraries]
+android-maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsComposeVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+gms-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
+gms-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -30,6 +37,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro", version.ref = "benchmarkMacro" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
