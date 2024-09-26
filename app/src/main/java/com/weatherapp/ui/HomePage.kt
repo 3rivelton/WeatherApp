@@ -1,5 +1,6 @@
 package com.weatherapp.ui
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,13 +14,19 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.weatherapp.MainViewModel
 import com.weatherapp.R
 
 @Composable
-fun HomePage(modifier: Modifier = Modifier) {
+fun HomePage(
+    viewModel : MainViewModel,
+    context: Context
+) {
 
     Column(
-        modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.teal_700))
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.teal_700))
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
