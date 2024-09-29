@@ -39,7 +39,7 @@ fun MapPage(
 
     GoogleMap (
         modifier = Modifier.fillMaxSize(),
-        onMapClick = { viewModel.add("Nova cidade", location = it) },
+        onMapClick = { viewModel.add("Nova cidade"+it.latitude, location = it) },
         cameraPositionState = camPosState,
         properties = MapProperties(isMyLocationEnabled = hasLocationPermission),
         uiSettings = MapUiSettings(myLocationButtonEnabled = true)
