@@ -7,10 +7,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.weatherapp.db.fb.FBDatabase
 import com.weatherapp.model.City
 import com.weatherapp.model.User
 
-class MainViewModel : ViewModel() {
+class MainViewModel : ViewModel(), FBDatabase.Listener {
 
     private val _user = mutableStateOf (User("", ""))
     val user : User
@@ -28,21 +29,27 @@ class MainViewModel : ViewModel() {
         listener.onAuthStateChanged(Firebase.auth)
         Firebase . auth . addAuthStateListener (listener)
     }
+
     override fun onCleared() {
-                    Firebase.auth.removeAuthStateListener(listener)
+        Firebase.auth.removeAuthStateListener(listener)
+    }
+
+    override fun onUserLoaded(user: User) {
+        _user.value = user
+    }
+
+    override fun onCityAdded(city: City) {
+        _cities.add(city)
+    }
+
+    override fun onCityRemoved(city: City) {
+        _cities.remove(city)
     }
 
     private val _cities = getCities().toMutableStateList()
     val cities: List<City>
         get() = _cities
 
-    fun remove(city: City) {
-        _cities.remove(city)
-    }
-
-    fun add(city: String, location: LatLng? = null) {
-        _cities.add(City(city, "Carregando clima...", location))
-    }
 }
 
 public fun getCities() = List(30) { i ->

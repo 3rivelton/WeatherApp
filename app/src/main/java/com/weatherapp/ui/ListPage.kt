@@ -25,11 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.weatherapp.model.City
 import com.weatherapp.MainViewModel
+import com.weatherapp.db.fb.FBDatabase
 
 
 @Composable
 fun ListPage(
     viewModel: MainViewModel,
+    fbDatabase : FBDatabase,
     context: Context
 ) {
 
@@ -41,7 +43,7 @@ fun ListPage(
     ) {
         items(cityList) { city ->
             CityItem(city = city, onClose = {
-                viewModel.remove(city)
+                fbDatabase.remove(city)
                 Toast.makeText(context, "removido", Toast.LENGTH_LONG).show()
             }, onClick = {
                 Toast.makeText(context, "favorito", Toast.LENGTH_LONG).show()

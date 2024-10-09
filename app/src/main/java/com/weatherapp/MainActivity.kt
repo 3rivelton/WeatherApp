@@ -28,6 +28,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.weatherapp.db.fb.FBDatabase
+import com.weatherapp.model.City
 import com.weatherapp.ui.CityDialog
 import com.weatherapp.ui.nav.BottomNavBar
 import com.weatherapp.ui.nav.BottomNavItem
@@ -50,11 +52,12 @@ class MainActivity : ComponentActivity() {
             val currentRoute = navController.currentBackStackEntryAsState()
             val showButton = currentRoute.value?.destination?.route != BottomNavItem.MapPageKt.route
             val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(), onResult = {} )
+            val fbDB = remember { FBDatabase (viewModel) }
             WeatherAppTheme {
                 if (showDialog.value) CityDialog(
                     onDismiss = { showDialog.value = false },
                     onConfirm = { city ->
-                        if (city.isNotBlank()) viewModel.add(city)
+                        if (city.isNotBlank()) fbDB.add(City("city", "", null))
                         showDialog.value = false
                     })
                 Scaffold(
@@ -87,7 +90,7 @@ class MainActivity : ComponentActivity() {
                     innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                        MainNavHost(navController = navController, viewModel = viewModel, context = context)
+                        MainNavHost(navController = navController, viewModel = viewModel, fbDatabase = fbDB, context = context)
                     }
                 }
             }

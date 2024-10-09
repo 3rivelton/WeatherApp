@@ -16,10 +16,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.weatherapp.MainViewModel
 import com.weatherapp.R
+import com.weatherapp.db.fb.FBDatabase
 
 @Composable
 fun HomePage(
     viewModel : MainViewModel,
+    fbDatabase : FBDatabase,
     context: Context
 ) {
 
