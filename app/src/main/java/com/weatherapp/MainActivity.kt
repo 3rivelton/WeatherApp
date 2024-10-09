@@ -41,6 +41,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val viewModel : MainViewModel by viewModels()
         setContent {
+            if (!viewModel.loggedIn) {
+                this.finish()
+            }
             val navController = rememberNavController()
             val showDialog = remember { mutableStateOf(false) }
             val context = LocalContext.current
@@ -61,7 +64,6 @@ class MainActivity : ComponentActivity() {
                             actions = {
                                 IconButton( onClick = {
                                     Firebase.auth.signOut()
-                                    finish()
                                 }
                                 ) {
                                     Icon( imageVector = Icons.AutoMirrored.Filled.ExitToApp,
