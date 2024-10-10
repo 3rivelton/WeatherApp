@@ -82,6 +82,8 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
+    implementation(libs.coil.compose) // coil
+    implementation(libs.picasso) // Picasso
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
