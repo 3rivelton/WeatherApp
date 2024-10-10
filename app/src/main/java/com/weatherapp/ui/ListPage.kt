@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.weatherapp.model.City
 import com.weatherapp.MainViewModel
-import com.weatherapp.db.fb.FBDatabase
 import com.weatherapp.repo.Repository
 
 
