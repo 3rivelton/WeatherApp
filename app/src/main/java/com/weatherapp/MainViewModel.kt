@@ -1,9 +1,8 @@
 package com.weatherapp
 
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -30,6 +29,10 @@ class MainViewModel : ViewModel(), FBDatabase.Listener {
         Firebase . auth . addAuthStateListener (listener)
     }
 
+    private val _cities = mutableStateMapOf<String, City>()
+    val cities : List<City>
+        get() = _cities.values.toList()
+
     override fun onCleared() {
         Firebase.auth.removeAuthStateListener(listener)
     }
@@ -39,19 +42,10 @@ class MainViewModel : ViewModel(), FBDatabase.Listener {
     }
 
     override fun onCityAdded(city: City) {
-        _cities.add(city)
+        _cities[city.name] = city
     }
 
     override fun onCityRemoved(city: City) {
-        _cities.remove(city)
+        _cities.remove(city.name)
     }
-
-    private val _cities = getCities().toMutableStateList()
-    val cities: List<City>
-        get() = _cities
-
-}
-
-public fun getCities() = List(30) { i ->
-    City(name = "Cidade $i", weather = "Carregando clima...")
 }

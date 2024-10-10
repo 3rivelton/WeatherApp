@@ -19,13 +19,12 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.weatherapp.MainViewModel
-import com.weatherapp.db.fb.FBDatabase
-import com.weatherapp.model.City
+import com.weatherapp.repo.Repository
 
 @Composable
 fun MapPage(
     viewModel : MainViewModel,
-    fbDatabase : FBDatabase,
+    repo : Repository,
     context: Context
 ) {
     val recife = LatLng(-8.05, -34.9)
@@ -42,7 +41,7 @@ fun MapPage(
 
     GoogleMap (
         modifier = Modifier.fillMaxSize(),
-        onMapClick = { fbDatabase.add(City("Nova cidade"+it.latitude, "", location = it)) },
+        onMapClick = { repo.addCity(lat = it.latitude, lng = it.longitude)},
         cameraPositionState = camPosState,
         properties = MapProperties(isMyLocationEnabled = hasLocationPermission),
         uiSettings = MapUiSettings(myLocationButtonEnabled = true)
