@@ -9,8 +9,9 @@ import com.google.firebase.auth.auth
 import com.weatherapp.db.fb.FBDatabase
 import com.weatherapp.model.City
 import com.weatherapp.model.User
+import com.weatherapp.repo.Repository
 
-class MainViewModel : ViewModel(), FBDatabase.Listener {
+class MainViewModel : ViewModel(), FBDatabase.Listener, Repository.Listener {
 
     private val _user = mutableStateOf (User("", ""))
     val user : User
@@ -47,5 +48,10 @@ class MainViewModel : ViewModel(), FBDatabase.Listener {
 
     override fun onCityRemoved(city: City) {
         _cities.remove(city.name)
+    }
+
+    override fun onCityUpdated(city: City) {
+        _cities.remove(city.name)
+        _cities[city.name] = city.copy()
     }
 }

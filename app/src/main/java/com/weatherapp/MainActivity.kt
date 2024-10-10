@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val viewModel : MainViewModel by viewModels()
+//        val listener : Repository.Listener by
         setContent {
             if (!viewModel.loggedIn) {
                 this.finish()
