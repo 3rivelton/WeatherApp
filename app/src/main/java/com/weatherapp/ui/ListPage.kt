@@ -25,16 +25,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.weatherapp.model.City
 import com.weatherapp.MainViewModel
 import com.weatherapp.repo.Repository
+import com.weatherapp.ui.nav.BottomNavItem
 
 
 @Composable
 fun ListPage(
     viewModel: MainViewModel,
-    repository : Repository,
-    context: Context
+    repository: Repository,
+    context: Context,
+    navController: NavHostController
 ) {
 
     val activity = LocalContext.current as? Activity
@@ -50,8 +53,15 @@ fun ListPage(
                 repository.loadWeather(city)
             }
             CityItem(city = city, onClose = {
-                repository.remove(city)
-                Toast.makeText(context, "removido", Toast.LENGTH_LONG).show()
+                viewModel.city = city
+                repository.loadForecast(city)
+                navController.navigate(BottomNavItem.HomePageKt.route) {
+                    navController.graph.startDestinationRoute?.let {
+                        popUpTo(it) { saveState = true }
+                        restoreState = true
+                    }
+                    launchSingleTop = true
+                }
             }, onClick = {
                 Toast.makeText(context, "favorito", Toast.LENGTH_LONG).show()
             })
@@ -79,12 +89,16 @@ fun CityItem(
         )
         Spacer(modifier = Modifier.size(12.dp))
         Column(modifier = modifier.weight(1f)) {
-            Text(modifier = Modifier,
+            Text(
+                modifier = Modifier,
                 text = city.name,
-                fontSize = 24.sp)
-            Text(modifier = Modifier,
-                text = city.weather?.desc?:"carregando...",
-                fontSize = 16.sp)
+                fontSize = 24.sp
+            )
+            Text(
+                modifier = Modifier,
+                text = city.weather?.desc ?: "carregando...",
+                fontSize = 16.sp
+            )
         }
         IconButton(onClick = onClose) {
             Icon(Icons.Filled.Close, contentDescription = "Close")

@@ -54,6 +54,7 @@ class MainActivity : ComponentActivity() {
             val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(), onResult = {} )
 //            val fbDB = remember { FBDatabase (viewModel) }
             val repo = remember { Repository (viewModel) }
+            val modifier = Modifier
             WeatherAppTheme {
                 if (showDialog.value) CityDialog(
                     onDismiss = { showDialog.value = false },
@@ -91,7 +92,13 @@ class MainActivity : ComponentActivity() {
                     innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                        MainNavHost(navController = navController, viewModel = viewModel, repository = repo, context = context)
+                        MainNavHost(
+                            navController = navController,
+                            viewModel = viewModel,
+                            repository = repo,
+                            modifier = modifier,
+                            context = context
+                        )
                     }
                 }
             }
