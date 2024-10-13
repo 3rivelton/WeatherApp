@@ -9,10 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
 import com.weatherapp.R
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,9 +35,6 @@ fun HomePage(
                 error = painterResource(id = R.drawable.loading),
                 contentDescription = "Imagem"
             )
-
-            val format = DecimalFormat("#.0")
-
             Column {
                 Spacer(modifier = Modifier.size(20.dp))
                 Text(text = viewModel.city?.name ?: "Selecione uma cidade...", fontSize = 24.sp)
@@ -51,11 +45,17 @@ fun HomePage(
             }
         }
 
-        if (viewModel.city == null || viewModel.city!!.forecast == null) return
+//        if (viewModel.city == null || viewModel.city!!.forecast == null) return
 
-        LazyColumn {
-            items(viewModel.city!!.forecast!!) { forecast ->
-                ForecastItem(forecast, onClick = { }, modifier = modifier )
+        viewModel.city?.forecast?.let { forecasts ->
+            LazyColumn {
+                items(forecasts) { forecast ->
+                    ForecastItem(
+                        forecast = forecast,
+                        onClick = {},
+                        modifier = modifier
+                    )
+                }
             }
         }
     }
